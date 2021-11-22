@@ -56,14 +56,14 @@ class MinHashScorer:
         ]
 
     def _convert_to_subtree_shingleset(
-        self, adjacency_list: list
-    ) -> list[bytes]:
+        self, adjacency_list: List[Tuple[int, int, str]]
+    ) -> List[bytes]:
         nested = treesimi.adjac_to_nested_with_attr(adjacency_list)
         nested = treesimi.remove_node_ids(nested)
         shingled = treesimi.shingleset(nested, **self._treesimi_config)
         return [json.dumps(tree).encode("utf-8") for tree in shingled]
 
-    def _minhash(self, shingled_subtrees: list[bytes]) -> datasketch.MinHash:
+    def _minhash(self, shingled_subtrees: List[bytes]) -> datasketch.MinHash:
         minhash = datasketch.MinHash(num_perm=256)
         for s in shingled_subtrees:
             minhash.update(s)
