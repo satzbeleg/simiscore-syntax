@@ -43,7 +43,7 @@ class MinHashScorer:
 
     def _convert_to_adjacency_list(
         self, parsed_sentence: dict
-    ) -> list[Tuple[int, int, str]]:
+    ) -> List[Tuple[int, int, str]]:
         return [
             (token["id"], token["head"], token["deprel"])
             if isinstance(token["id"], int)
