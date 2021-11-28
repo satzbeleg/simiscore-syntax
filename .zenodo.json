@@ -1,8 +1,13 @@
 {
-  "creators": [{
-    "name": "Ulf A. Hamster",
-    "orcid": "0000-0002-0440-4868"
-  }],
+  "creators": [
+    {
+      "name": "Ulf A. Hamster",
+      "orcid": "0000-0002-0440-4868"
+    },
+    {
+      "name": "Luise Köhler"
+    }
+  ],
   "title": "simiscore-syntax: ML API for syntactic similarities",
   "description": "ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.",
   "license": "Apache-2.0",
