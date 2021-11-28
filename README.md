@@ -45,6 +45,12 @@ pip install -r requirements-dev.txt --no-cache-dir
 (If your git repo is stored in a folder with whitespaces, then don't use the subfolder `.venv`. Use an absolute path without whitespaces.)
 
 
+### Download trankit model
+```sh
+source .venv/bin/activate
+python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
+```
+
 ### Start Server
 
 ```sh
