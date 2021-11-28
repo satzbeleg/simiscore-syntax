@@ -1,9 +1,9 @@
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/myorg/template-fastapi.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/myorg/template-fastapi/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/myorg/template-fastapi.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/myorg/template-fastapi/context:python)
-[![template-fastapi](https://snyk.io/advisor/python/template-fastapi/badge.svg)](https://snyk.io/advisor/python/template-fastapi)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/context:python)
 
 
-# TEMPLATE FASTAPI
+# simiscore-syntax
+ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.
 
 
 ## Docker Deployment
@@ -86,8 +86,8 @@ rm -r .venv
 ## Appendix
 
 ### Support
-Please [open an issue](https://github.com/myorg/template-fastapi/issues/new) for support.
+Please [open an issue](https://github.com/satzbeleg/simiscore-syntax/issues/new) for support.
 
 
 ### Contributing
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/myorg/template-fastapi/compare/).
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/satzbeleg/simiscore-syntax/compare/).

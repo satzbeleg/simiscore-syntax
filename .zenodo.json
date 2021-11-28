@@ -1,0 +1,16 @@
+{
+  "creators": [{
+    "name": "Ulf A. Hamster",
+    "orcid": "0000-0002-0440-4868"
+  }],
+  "title": "simiscore-syntax: ML API for syntactic similarities",
+  "description": "ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.",
+  "license": "Apache-2.0",
+  "upload_type": "software",
+  "keywords": [
+    "dependency grammar", "dependency tree", 
+    "jaccard similarity", "datasketch", "minhash",
+    "REST API", "fastapi", "ML API",
+    "Open-source"
+  ]
+}
