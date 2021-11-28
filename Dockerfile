@@ -38,8 +38,8 @@ ENV VIRTUAL_ENV=/opt/venv
 COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Download model into image (throws error 137, i.e. RAM/HDD problems)
-#RUN python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
+# Download model into image (error 137 => allocate more RAM/HDD)
+RUN python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
 
 # Port Setting
 EXPOSE 80

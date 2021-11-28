@@ -4,13 +4,15 @@ services:
     build:   # build using Dockfile in this directory
       context: .
       dockerfile: Dockerfile
-    command: >   # download trankit model before starting gunicorn
-      sh -c "
-        python -c 'import trankit; trankit.Pipeline(lang=\"german\", gpu=False, cache_dir=\"./cache\")'
-        && gunicorn app.main:app 
-                  --bind 0.0.0.0:80 
-                  --worker-class uvicorn.workers.UvicornH11Worker 
-                  --workers ${NUM_WORKERS}
-                  --worker-tmp-dir /dev/shm"
+    command: >
+      bash -c "
+        gunicorn app.main:app 
+          --bind 0.0.0.0:80 
+          --timeout 180
+          --worker-class uvicorn.workers.UvicornH11Worker 
+          --workers ${NUM_WORKERS} 
+          --worker-tmp-dir /dev/shm "
     ports:
       - "${API_PORT}:80"
+
+# python -c 'import trankit; trankit.Pipeline(lang=\"german\", gpu=False, cache_dir=\"./cache\")' && 
