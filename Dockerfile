@@ -23,8 +23,8 @@ RUN pip3 install --no-cache-dir --upgrade pip
 COPY requirements.txt requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# compile to bytecode
-RUN python3 -O -m compileall $VIRTUAL_ENV
+# compile to bytecode (Fails due to `trankit` package)
+# RUN python3 -O -m compileall $VIRTUAL_ENV
 
 # remove build dependencies
 RUN apt-get remove --purge --auto-remove -y build-essential python3-dev python3-venv
@@ -38,8 +38,8 @@ ENV VIRTUAL_ENV=/opt/venv
 COPY --from=builder $VIRTUAL_ENV $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Download model into image
-RUN python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
+# Download model into image (throws error 137, i.e. RAM/HDD problems)
+#RUN python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
 
 # Port Setting
 EXPOSE 80
