@@ -1,9 +1,9 @@
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/myorg/template-fastapi.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/myorg/template-fastapi/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/myorg/template-fastapi.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/myorg/template-fastapi/context:python)
-[![template-fastapi](https://snyk.io/advisor/python/template-fastapi/badge.svg)](https://snyk.io/advisor/python/template-fastapi)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/context:python)
 
 
-# TEMPLATE FASTAPI
+# simiscore-syntax
+ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.
 
 
 ## Docker Deployment
@@ -12,9 +12,10 @@ Call Docker Compose
 ```sh
 export NUM_WORKERS=2
 export API_PORT=12345
-docker-compose up
+docker-compose -f docker-compose.yml up --build
+
 # or as oneliner:
-# NUM_WORKERS=2 API_PORT=12345 docker-compose up
+NUM_WORKERS=2 API_PORT=12345 docker-compose -f docker-compose.yml up --build
 ```
 
 (Start docker daemon before, e.g. `open /Applications/Docker.app` on MacOS).
@@ -44,6 +45,12 @@ pip install -r requirements-dev.txt --no-cache-dir
 
 (If your git repo is stored in a folder with whitespaces, then don't use the subfolder `.venv`. Use an absolute path without whitespaces.)
 
+
+### Download trankit model
+```sh
+source .venv/bin/activate
+python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
+```
 
 ### Start Server
 
@@ -86,8 +93,8 @@ rm -r .venv
 ## Appendix
 
 ### Support
-Please [open an issue](https://github.com/myorg/template-fastapi/issues/new) for support.
+Please [open an issue](https://github.com/satzbeleg/simiscore-syntax/issues/new) for support.
 
 
 ### Contributing
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/myorg/template-fastapi/compare/).
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/satzbeleg/simiscore-syntax/compare/).
