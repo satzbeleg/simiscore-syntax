@@ -5,7 +5,8 @@
       "orcid": "0000-0002-0440-4868"
     },
     {
-      "name": "Luise Köhler"
+      "name": "Luise Köhler",
+      "orcid": "0000-0001-5144-1920"
     }
   ],
   "title": "simiscore-syntax: ML API for syntactic similarities",
