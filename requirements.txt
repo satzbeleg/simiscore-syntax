@@ -6,4 +6,4 @@ gunicorn>=20.1.0
 numpy>=1.17.4,<2
 trankit>=1,<2
 treesimi>=0.1.5,<1
-datasketch>1,<2
+datasketch>=1.5.4,<2
