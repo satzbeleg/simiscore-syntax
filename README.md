@@ -4,6 +4,7 @@
 
 
 # simiscore-syntax
+ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.
 
 
 ## Docker Deployment
@@ -12,9 +13,10 @@ Call Docker Compose
 ```sh
 export NUM_WORKERS=2
 export API_PORT=12345
-docker-compose up
+docker-compose -f docker-compose.yml up --build
+
 # or as oneliner:
-# NUM_WORKERS=2 API_PORT=12345 docker-compose up
+NUM_WORKERS=2 API_PORT=12345 docker-compose -f docker-compose.yml up --build
 ```
 
 (Start docker daemon before, e.g. `open /Applications/Docker.app` on MacOS).
@@ -44,6 +46,12 @@ pip install -r requirements-dev.txt --no-cache-dir
 
 (If your git repo is stored in a folder with whitespaces, then don't use the subfolder `.venv`. Use an absolute path without whitespaces.)
 
+
+### Download trankit model
+```sh
+source .venv/bin/activate
+python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
+```
 
 ### Start Server
 
