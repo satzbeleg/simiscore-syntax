@@ -69,17 +69,24 @@ Notes:
 
 ### Run some requests
 
-```curl -X POST "http://localhost:12345/similarities/" \
+```sh
+curl -X POST "http://localhost:12345/similarities/" \
     -H "accept: application/json" \
     -H "Content-Type: application/json" \
-    -d '["Die Kuh macht muh.", "Die Muh macht kuh."]'
+    -d '["Die Katze miaut.", "Der Hund bellt."]'
+```
+```sh
+curl -X POST "http://localhost:12345/similarities/" \
+    -H "accept: application/json" \
+    -H "Content-Type: application/json" \
+    -d '["Leise rieselt der Schnee.", "Der Schnee rieselt leise."]'
 ```
 
 ### Other commands and help
 * Check syntax: `flake8 --ignore=F401 --exclude=$(grep -v '^#' .gitignore | xargs | sed -e 's/ /,/g')`
 * Run Unit Tests: `PYTHONPATH=. pytest`
-- Show the docs: [http://localhost:12345/docs`](http://localhost:80/docs`)
-- Show Redoc: [http://localhost:12345/redoc](http://localhost:80/redoc)
+- Show the docs: [http://localhost:12345/docs](http://localhost:12345/docs)
+- Show Redoc: [http://localhost:12345/redoc](http://localhost:12345/redoc)
 
 
 ### Clean up 
