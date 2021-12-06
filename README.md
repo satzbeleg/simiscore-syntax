@@ -69,16 +69,17 @@ Notes:
 
 ### Run some requests
 
-```sh
-curl http://localhost:80
-curl "http://localhost:80/items/5?q=somequery"
+```curl -X POST "http://localhost:12345/similarities/" \
+    -H "accept: application/json" \
+    -H "Content-Type: application/json" \
+    -d '["Die Kuh macht muh.", "Die Muh macht kuh."]'
 ```
 
 ### Other commands and help
 * Check syntax: `flake8 --ignore=F401 --exclude=$(grep -v '^#' .gitignore | xargs | sed -e 's/ /,/g')`
 * Run Unit Tests: `PYTHONPATH=. pytest`
-- Show the docs: [http://localhost:80/docs`](http://localhost:80/docs`)
-- Show Redoc: [http://localhost:80/redoc](http://localhost:80/redoc)
+- Show the docs: [http://localhost:12345/docs`](http://localhost:80/docs`)
+- Show Redoc: [http://localhost:12345/redoc](http://localhost:80/redoc)
 
 
 ### Clean up 
