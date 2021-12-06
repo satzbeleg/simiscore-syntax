@@ -53,6 +53,5 @@ def test_post_request(test_sentences):
     result = [
         response.json()["matrix"][i][i] for i in range(len(test_sentences))
     ]
-    print(result)
     assert response.status_code == 200
     assert all(almost_equal(val1, 1) for val1 in result)
