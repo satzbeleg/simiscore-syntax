@@ -68,6 +68,7 @@ Notes:
 
 
 ### Run some requests
+The following example should yield a high similarity score because both sentences exhibit an identical syntactic structure:
 
 ```sh
 curl -X POST "http://localhost:12345/similarities/" \
@@ -75,11 +76,19 @@ curl -X POST "http://localhost:12345/similarities/" \
     -H "Content-Type: application/json" \
     -d '["Die Katze miaut.", "Der Hund bellt."]'
 ```
+The example below should yield a lower similarity score because the two sentences differ in their syntactic structure:
 ```sh
 curl -X POST "http://localhost:12345/similarities/" \
     -H "accept: application/json" \
     -H "Content-Type: application/json" \
     -d '["Leise rieselt der Schnee.", "Der Schnee rieselt leise."]'
+```
+The example below should yield a low similarity score because the two sentences differ a lot with regard to their syntactic structure.
+```sh
+curl -X POST "http://localhost:12345/similarities/"  \
+   -H "accept: application/json"  \
+   -H "Content-Type: application/json"   \
+   -d '["Der Schneemann ist groß.", "Die Kinder spielen im Schnee."]'
 ```
 
 ### Other commands and help
