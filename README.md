@@ -24,7 +24,6 @@ Check
 
 ```sh
 curl http://localhost:12345
-curl "http://127.0.0.1:12345/items/5?q=somequery"
 ```
 
 Notes: Only `main.py` is used in `Dockerfile`.
