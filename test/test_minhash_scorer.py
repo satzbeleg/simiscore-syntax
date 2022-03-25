@@ -29,7 +29,7 @@ def sentences():
 def test_score_for_same_sentence(scorer, sentences):
     test_sentences = {"a": sentences[1], "b": sentences[1]}
     result = scorer.compute_similarity_matrix(test_sentences)["matrix"][0][1]
-    assert pytest.approx(result, 1.0)
+    assert pytest.approx(result) == 1.0
 
 
 def test_score_for_different_sentences(scorer, sentences):
@@ -60,7 +60,7 @@ def test_empty_query(scorer, sentences):
 def test_query_only_one_sentence(scorer, sentences):
     query = {"a": sentences[2]}
     result = scorer.compute_similarity_matrix(query)["matrix"][0][0]
-    assert pytest.approx(result, 1)
+    assert pytest.approx(result) == 1
 
 
 def test_multiple_sentences(scorer, sentences):
@@ -71,4 +71,4 @@ def test_multiple_sentences(scorer, sentences):
     result = scorer.compute_similarity_matrix(query)["matrix"][0][
         len(sentences)
     ]
-    assert pytest.approx(result, 1)
+    assert pytest.approx(result) == 1
