@@ -1,18 +1,13 @@
 version: '3'
 services:
   simiscore-syntax:
+    image: evidence-simiscore-syntax
     build:   # build using Dockfile in this directory
       context: .
       dockerfile: Dockerfile
-    command:
-      bash -c "
-        gunicorn app.main:app 
-          --bind 0.0.0.0:80 
-          --timeout 180
-          --worker-class uvicorn.workers.UvicornH11Worker 
-          --workers ${NUM_WORKERS} 
-          --worker-tmp-dir /dev/shm "
+    environment:
+      # Fastapi/gunicorn settings, see https://github.com/tiangolo/uvicorn-gunicorn-docker/tree/master#workers_per_core
+      - "WORKERS_PER_CORE=0.5"
+      # - "MAX_WORKERS=2"
     ports:
       - "${API_PORT}:80"
-
-# python -c 'import trankit; trankit.Pipeline(lang=\"german\", gpu=False, cache_dir=\"./cache\")' && 

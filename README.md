@@ -5,18 +5,19 @@
 
 # simiscore-syntax
 ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.
-
+The API is programmed with the [`fastapi` Python package](https://fastapi.tiangolo.com/), 
+uses the packages [`datasketch`](http://ekzhu.com/datasketch/index.html), [`kshingle`](https://github.com/ulf1/kshingle), and [`treesimi`](https://github.com/ulf1/treesimi) to compute similarity scores.
+The deployment is configured for Docker Compose.
 
 ## Docker Deployment
 Call Docker Compose
 
 ```sh
-export NUM_WORKERS=2
 export API_PORT=12345
 docker-compose -f docker-compose.yml up --build
 
 # or as oneliner:
-NUM_WORKERS=2 API_PORT=12345 docker-compose -f docker-compose.yml up --build
+API_PORT=12345 docker-compose -f docker-compose.yml up --build
 ```
 
 (Start docker daemon before, e.g. `open /Applications/Docker.app` on MacOS).
@@ -56,16 +57,10 @@ python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir=
 
 ```sh
 source .venv/bin/activate
-#uvicorn app.main:app --reload
-gunicorn app.main:app --reload --bind=0.0.0.0:80 \
-    --worker-class=uvicorn.workers.UvicornH11Worker --workers=2
+uvicorn app.main:app --reload
+# gunicorn app.main:app --reload --bind=0.0.0.0:8080 \
+#     --worker-class=uvicorn.workers.UvicornH11Worker --workers=2
 ```
-
-Notes: 
-
-- In the Dockerfile also the argument `--worker-tmp-dir=/dev/shm` is set what default path to a docker container's "in-memory filesystem", i.e. the temporary folder.
-- The `uvicorn.workers.UvicornWorker` worker can use HTTPS certificates by adding the arguments `--keyfile=./key.pem --certfile=./cert.pem` (see [Setup HTTPS for uvicorn](https://www.uvicorn.org/deployment/#running-with-https))
-
 
 ### Run some requests
 The following example should yield a high similarity score because both sentences exhibit an identical syntactic structure:
