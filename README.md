@@ -11,12 +11,11 @@ ML API to compute the jaccard similarity score based serialized and shingled dep
 Call Docker Compose
 
 ```sh
-export NUM_WORKERS=2
 export API_PORT=12345
 docker-compose -f docker-compose.yml up --build
 
 # or as oneliner:
-NUM_WORKERS=2 API_PORT=12345 docker-compose -f docker-compose.yml up --build
+API_PORT=12345 docker-compose -f docker-compose.yml up --build
 ```
 
 (Start docker daemon before, e.g. `open /Applications/Docker.app` on MacOS).
@@ -56,9 +55,9 @@ python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir=
 
 ```sh
 source .venv/bin/activate
-#uvicorn app.main:app --reload
-gunicorn app.main:app --reload --bind=0.0.0.0:80 \
-    --worker-class=uvicorn.workers.UvicornH11Worker --workers=2
+uvicorn app.main:app --reload
+# gunicorn app.main:app --reload --bind=0.0.0.0:8080 \
+#     --worker-class=uvicorn.workers.UvicornH11Worker --workers=2
 ```
 
 Notes: 
