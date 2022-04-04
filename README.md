@@ -4,7 +4,7 @@
 
 
 # simiscore-syntax
-ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.
+ML API to compute the Jaccard similarity score based on serialized and shingled dependency grammar subtrees.
 The API is programmed with the [`fastapi` Python package](https://fastapi.tiangolo.com/), 
 uses the packages [`datasketch`](http://ekzhu.com/datasketch/index.html), [`kshingle`](https://github.com/ulf1/kshingle), and [`treesimi`](https://github.com/ulf1/treesimi) to compute similarity scores.
 The deployment is configured for Docker Compose.
