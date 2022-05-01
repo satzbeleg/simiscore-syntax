@@ -9,7 +9,7 @@ srvurl = ""
 
 # basic information
 app = FastAPI(
-    title="Simiscore-Syntax ML API",
+    title="simiscore-syntax ML API",
     descriptions=(
         "ML API to compute the jaccard similarity score based serialized and"
         " shingled dependency grammar subtrees"
