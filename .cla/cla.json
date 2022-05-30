@@ -1,0 +1,20 @@
+{
+  "signedContributors": [
+    {
+      "name": "ulf1",
+      "id": 8018044,
+      "comment_id": 1079139043,
+      "created_at": "2022-03-25T15:25:59Z",
+      "repoId": 355462291,
+      "pullRequestNo": 14
+    },
+    {
+      "name": "knit-bee",
+      "id": 75680321,
+      "comment_id": 1087322408,
+      "created_at": "2022-04-04T09:25:51Z",
+      "repoId": 355462291,
+      "pullRequestNo": 17
+    }
+  ]
+}
