@@ -13,11 +13,11 @@ The deployment is configured for Docker Compose.
 Call Docker Compose
 
 ```sh
-export API_PORT=12345
+export API_PORT=8084
 docker-compose -f docker-compose.yml up --build
 
 # or as oneliner:
-API_PORT=12345 docker-compose -f docker-compose.yml up --build
+API_PORT=8084 docker-compose -f docker-compose.yml up --build
 ```
 
 (Start docker daemon before, e.g. `open /Applications/Docker.app` on MacOS).
@@ -25,7 +25,7 @@ API_PORT=12345 docker-compose -f docker-compose.yml up --build
 Check
 
 ```sh
-curl http://localhost:12345
+curl http://localhost:8084
 ```
 
 Notes: Only `main.py` is used in `Dockerfile`.
@@ -47,40 +47,43 @@ pip install -r requirements-dev.txt --no-cache-dir
 (If your git repo is stored in a folder with whitespaces, then don't use the subfolder `.venv`. Use an absolute path without whitespaces.)
 
 
-### Download trankit model
+### Download spacy model
 ```sh
 source .venv/bin/activate
-python -c 'import trankit; trankit.Pipeline(lang="german", gpu=False, cache_dir="./cache")'
 ```
 
 ### Start Server
 
 ```sh
 source .venv/bin/activate
-uvicorn app.main:app --reload
-# gunicorn app.main:app --reload --bind=0.0.0.0:8080 \
-#     --worker-class=uvicorn.workers.UvicornH11Worker --workers=2
+# uvicorn app.main:app --reload
+gunicorn app.main:app --reload --bind=0.0.0.0:8084 \
+    --worker-class=uvicorn.workers.UvicornH11Worker --workers=1 --timeout=600
 ```
 
 ### Run some requests
 The following example should yield a high similarity score because both sentences exhibit an identical syntactic structure:
 
 ```sh
-curl -X POST "http://localhost:12345/similarities/" \
+curl -X POST "http://localhost:8084/similarities/" \
     -H "accept: application/json" \
     -H "Content-Type: application/json" \
-    -d '["Die Katze miaut.", "Der Hund bellt."]'
+    -d '["Die Katze miaut.", "Der Hund bellte laut."]'
 ```
+
 The example below should yield a lower similarity score because the two sentences differ in their syntactic structure:
+
 ```sh
-curl -X POST "http://localhost:12345/similarities/" \
+curl -X POST "http://localhost:8084/similarities/" \
     -H "accept: application/json" \
     -H "Content-Type: application/json" \
     -d '["Leise rieselt der Schnee.", "Der Schnee rieselt leise."]'
 ```
+
 The example below should yield a low similarity score because the two sentences differ a lot with regard to their syntactic structure.
+
 ```sh
-curl -X POST "http://localhost:12345/similarities/"  \
+curl -X POST "http://localhost:8084/similarities/"  \
    -H "accept: application/json"  \
    -H "Content-Type: application/json"   \
    -d '["Der Schneemann ist groß.", "Die Kinder spielen im Schnee."]'
@@ -89,8 +92,8 @@ curl -X POST "http://localhost:12345/similarities/"  \
 ### Other commands and help
 * Check syntax: `flake8 --ignore=F401 --exclude=$(grep -v '^#' .gitignore | xargs | sed -e 's/ /,/g')`
 * Run Unit Tests: `PYTHONPATH=. pytest`
-- Show the docs: [http://localhost:12345/docs](http://localhost:12345/docs)
-- Show Redoc: [http://localhost:12345/redoc](http://localhost:12345/redoc)
+- Show the docs: [http://localhost:8084/docs](http://localhost:8084/docs)
+- Show Redoc: [http://localhost:8084/redoc](http://localhost:8084/redoc)
 
 
 ### Clean up 
