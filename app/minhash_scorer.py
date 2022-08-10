@@ -8,7 +8,7 @@ import treesimi
 
 
 class MinHashScorer:
-    def __init__(self) -> None:
+    def __init__(self, num_perm: int = 256) -> None:
         self.pipeline = spacy.load("de_dep_hdt_dist", disable=[
             'morphologizer', 'attribute_ruler', 'ner', 'lemmatizer'])
         self._treesimi_config = {
@@ -16,6 +16,7 @@ class MinHashScorer:
             "use_drop_nodes": False,
             "use_replace_attr": False,
         }
+        self.num_perm = num_perm
 
     def compute_similarity_matrix(
         self, query_sents: Dict[uuid.UUID, str]
@@ -52,7 +53,7 @@ class MinHashScorer:
         return stringified
 
     def _minhash(self, shingled_subtrees: List[bytes]) -> datasketch.MinHash:
-        minhash = datasketch.MinHash(num_perm=256)
+        minhash = datasketch.MinHash(num_perm=self.num_perm)
         for s in shingled_subtrees:
             minhash.update(s)
         return minhash

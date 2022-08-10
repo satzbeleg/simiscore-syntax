@@ -58,7 +58,8 @@ source .venv/bin/activate
 source .venv/bin/activate
 # uvicorn app.main:app --reload
 gunicorn app.main:app --reload --bind=0.0.0.0:8084 \
-    --worker-class=uvicorn.workers.UvicornH11Worker --workers=1 --timeout=600
+    --worker-class=uvicorn.workers.UvicornH11Worker \
+    --workers=1 --timeout=600
 ```
 
 ### Run some requests
