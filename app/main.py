@@ -9,7 +9,7 @@ srvurl = ""
 
 # basic information
 app = FastAPI(
-    title="Simiscore-Syntax ML API",
+    title="simiscore-syntax ML API",
     descriptions=(
         "ML API to compute the jaccard similarity score based serialized and"
         " shingled dependency grammar subtrees"
@@ -26,7 +26,24 @@ similarity_scorer = MinHashScorer()
 @app.get(f"{srvurl}/")
 def get_info() -> dict:
     """Returns basic information about the application"""
-    return {"version": app.version}
+    return {
+        "name": "simiscore-syntax",
+        "version": app.version,
+        "spacy": {
+            "model": "huggingface.co/reneknaebel/de_dep_hdt_dist"
+        },
+        "treesimi": similarity_scorer._treesimi_config,
+        "datasketch": {
+            "num_perm": similarity_scorer.num_perm,
+        },
+        "input-data": {
+            "type": "string"
+        },
+        "output-data": {
+            "type": "matrix",
+            "metric": "jaccard"
+        }
+    }
 
 
 @app.post(f"{srvurl}/similarities/", response_model=Dict[str, list])

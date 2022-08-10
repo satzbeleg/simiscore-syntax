@@ -3,30 +3,28 @@ import uuid
 from typing import Dict, List, Tuple
 
 import datasketch
-import trankit
+import spacy
 import treesimi
 
 
 class MinHashScorer:
-    def __init__(self) -> None:
-        self.pipeline = trankit.Pipeline(
-            lang="german", gpu=False, cache_dir="./cache"
-        )
+    def __init__(self, num_perm: int = 256) -> None:
+        self.pipeline = spacy.load("de_dep_hdt_dist", disable=[
+            'morphologizer', 'attribute_ruler', 'ner', 'lemmatizer'])
         self._treesimi_config = {
             "use_trunc_leaves": True,
             "use_drop_nodes": False,
             "use_replace_attr": False,
         }
+        self.num_perm = num_perm
 
     def compute_similarity_matrix(
         self, query_sents: Dict[uuid.UUID, str]
     ) -> Dict[str, list]:
         ids = list(query_sents.keys())
         minhash_table = []
-        for sent_id, sent in query_sents.items():
-            processed = self._parse_dependencies(sent)
-            adjac = self._convert_to_adjacency_list(processed)
-            shingled_subtrees = self._convert_to_subtree_shingleset(adjac)
+        for sent_id, sent_txt in query_sents.items():
+            shingled_subtrees = self._text_to_shingles(sent_txt)
             minhash_table.append(self._minhash(shingled_subtrees))
 
         similarity_matrix = [
@@ -38,33 +36,24 @@ class MinHashScorer:
         ]
         return {"ids": ids, "matrix": similarity_matrix}
 
-    def _parse_dependencies(self, sentence: str) -> dict:
-        return self.pipeline.posdep(sentence, is_sent=True)
-
-    def _convert_to_adjacency_list(
-        self, parsed_sentence: dict
-    ) -> List[Tuple[int, int, str]]:
-        return [
-            (token["id"], token["head"], token["deprel"])
-            if isinstance(token["id"], int)
-            else (
-                token["expanded"][0]["id"],
-                token["expanded"][0]["head"],
-                token["expanded"][0]["deprel"],
-            )
-            for token in parsed_sentence["tokens"]
-        ]
-
-    def _convert_to_subtree_shingleset(
-        self, adjacency_list: List[Tuple[int, int, str]]
-    ) -> List[bytes]:
-        nested = treesimi.adjac_to_nested_with_attr(adjacency_list)
-        nested = treesimi.remove_node_ids(nested)
-        shingled = treesimi.shingleset(nested, **self._treesimi_config)
-        return [json.dumps(tree).encode("utf-8") for tree in shingled]
+    def _text_to_shingles(self, text: str):
+        # spacy might identify multiple subtrees with the same label.
+        # thus, loop over all sentences identified by spacy
+        shingled_all = []
+        for adjac in treesimi.to_adjac_from_spacy(text, model=self.pipeline):
+            # convert adjacency list to nested set model
+            nested = treesimi.adjac_to_nested_with_attr(adjac)
+            nested = treesimi.remove_node_ids(nested)
+            # extract subtrees
+            shingled = treesimi.shingleset(nested, **self._treesimi_config)
+            shingled_all.extend(shingled)
+        # cheesy trick: convert subtrees in `shingled` to strings.
+        stringified = [json.dumps(tree).encode('utf-8')
+                       for tree in shingled_all]
+        return stringified
 
     def _minhash(self, shingled_subtrees: List[bytes]) -> datasketch.MinHash:
-        minhash = datasketch.MinHash(num_perm=256)
+        minhash = datasketch.MinHash(num_perm=self.num_perm)
         for s in shingled_subtrees:
             minhash.update(s)
         return minhash
