@@ -10,12 +10,13 @@
     }
   ],
   "title": "simiscore-syntax: ML API for syntactic similarities",
-  "description": "ML API to compute the jaccard similarity score based serialized and shingled dependency grammar subtrees.",
+  "description": "An ML API to compute the jaccard similarity based on shingled subtrees of the dependency grammar.",
   "license": "Apache-2.0",
   "upload_type": "software",
   "keywords": [
     "dependency grammar", "dependency tree", 
-    "jaccard similarity", "datasketch", "minhash",
+    "spacy", "hamburg dependency treebank", "german-hdt",
+    "jaccard similarity", "datasketch", "minhash", "shingling", "treesimi",
     "REST API", "fastapi", "ML API",
     "Open-source"
   ]
