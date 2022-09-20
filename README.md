@@ -1,10 +1,13 @@
 [![Join the chat at https://gitter.im/satzbeleg/community](https://badges.gitter.im/satzbeleg/community.svg)](https://gitter.im/satzbeleg/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/context:python)
 
 
 # simiscore-syntax
-ML API to compute the Jaccard similarity score based on serialized and shingled dependency grammar subtrees.
-The API is programmed with the [`fastapi` Python package](https://fastapi.tiangolo.com/), 
-uses the packages [`datasketch`](http://ekzhu.com/datasketch/index.html), [`kshingle`](https://github.com/ulf1/kshingle), and [`treesimi`](https://github.com/ulf1/treesimi) to compute similarity scores.
+An ML API to compute the Jaccard similarity based on shingled subtrees of the dependency grammar.
+The API is programmed with the [`fastapi` Python package](https://fastapi.tiangolo.com/). 
+Dependency trees are extracted with a [`spacy`](https://github.com/explosion/spaCy) model [trained on HDT](https://huggingface.co/reneknaebel/de_dep_hdt_dist).
+The similarity scores are computed with the packages [`datasketch`](http://ekzhu.com/datasketch/index.html) and [`treesimi`](https://github.com/ulf1/treesimi).
 The deployment is configured for Docker Compose.
 
 ## Docker Deployment
@@ -105,6 +108,16 @@ rm -r .venv
 
 
 ## Appendix
+
+## Citation
+
+### References
+- Sebastián Ramírez, 2018, FastAPI, [https://github.com/tiangolo/fastapi](https://github.com/tiangolo/fastapi)
+- Ines Montani, Matthew Honnibal, Matthew Honnibal, Sofie Van Landeghem, Adriane Boyd, Henning Peters, Paul O'Leary McCann, Maxim Samsonov, Jim Geovedi, Jim O'Regan, Duygu Altinok, György Orosz, Søren Lind Kristiansen, Daniël de Kok, Lj Miranda, Roman, Explosion Bot, Leander Fiedler, Grégory Howard, … Björn Böing. (2022). explosion/spaCy: New Span Ruler component, JSON (de)serialization of Doc, span analyzer and more (v3.3.1). Zenodo. [https://doi.org/10.5281/zenodo.6621076](https://doi.org/10.5281/zenodo.6621076)
+- Rene Knaebel. (2022). reneknaebel/de_dep_hdt_dist (v0.1.0). Huggingface. [https://huggingface.co/reneknaebel/de_dep_hdt_dist](https://huggingface.co/reneknaebel/de_dep_hdt_dist)
+- Eric Zhu, Vadim Markovtsev, aastafiev, Wojciech Łukasiewicz, ae-foster, Sinusoidal36, Ekevoo, Kevin Mann, Keyur Joshi, Peter Kubov, Qin TianHuan, Spandan Thakur, Stefano Ortolani, Titusz, Vojtech Letal, Zac Bentley, fpug, & oisincar. (2021). ekzhu/datasketch: v1.5.4 (v1.5.4). Zenodo. [https://doi.org/10.5281/zenodo.5758425](https://doi.org/10.5281/zenodo.5758425)
+- Ulf Hamster, & Luise Köhler. (2022). treesimi: Shingling for measuring tree similarity (0.1.6). Zenodo. [https://doi.org/10.5281/zenodo.6501989](https://doi.org/10.5281/zenodo.6501989)
+
 
 ### Support
 Please [open an issue](https://github.com/satzbeleg/simiscore-syntax/issues/new) for support.

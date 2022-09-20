@@ -1,4 +1,5 @@
-# other packages specific to the APInumpy>=1.17.4,<2
+# other packages specific to the API
+numpy>=1.17.4,<2
 spacy>=3.3.1,<3.4.0
 https://huggingface.co/reneknaebel/de_dep_hdt_dist/resolve/main/de_dep_hdt_dist-any-py3-none-any.whl
 treesimi>=0.1.6,<0.2.0
