@@ -1,6 +1,5 @@
 [![Join the chat at https://gitter.im/satzbeleg/community](https://badges.gitter.im/satzbeleg/community.svg)](https://gitter.im/satzbeleg/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/satzbeleg/simiscore-syntax.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/satzbeleg/simiscore-syntax/context:python)
+[![DOI](https://zenodo.org/badge/355462291.svg)](https://zenodo.org/badge/latestdoi/355462291)
 
 
 # simiscore-syntax
@@ -110,6 +109,21 @@ rm -r .venv
 ## Appendix
 
 ## Citation
+
+```
+@software{ulf_a_hamster_2022_7095998,
+  author       = {Ulf A. Hamster and
+                  Luise Köhler},
+  title        = {{simiscore-syntax: ML API for syntactic 
+                   similarities}},
+  month        = sep,
+  year         = 2022,
+  publisher    = {Zenodo},
+  version      = {0.1.0},
+  doi          = {10.5281/zenodo.7095998},
+  url          = {https://doi.org/10.5281/zenodo.7095998}
+}
+```
 
 ### References
 - Sebastián Ramírez, 2018, FastAPI, [https://github.com/tiangolo/fastapi](https://github.com/tiangolo/fastapi)
